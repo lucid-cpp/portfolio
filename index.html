@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portfolio</title>
+
+<style>
+:root{
+  --bg:#05030a;
+  --panel: rgba(14,10,22,.75);
+  --panel2: rgba(18,12,28,.55);
+  --text:#f2efff;
+  --muted: rgba(242,239,255,.65);
+  --border: rgba(168,85,247,.28);
+  --accent:#a855f7;
+  --accent2:#7c3aed;
+  --grid: rgba(168,85,247,.12);
+  --radius:18px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  color:var(--text);
+  font-family:system-ui,Segoe UI,Inter;
+  background: var(--bg);
+  overflow-x:hidden;
+}
+
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+}
+
+.grid{
+  position:absolute;
+  inset:-40px;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image: radial-gradient(700px 500px at 50% 20%, black 45%, transparent 85%);
+  animation: drift 80s linear infinite; /* slower scroll */
+}
+
+@keyframes drift{
+  from{background-position:0 0}
+  to{background-position:96px 96px}
+}
+
+.orbs{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.orb{
+  position:absolute;
+  width:520px;height:520px;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, rgba(168,85,247,.35), transparent 70%);
+  filter:blur(8px);
+  opacity:.55;
+  animation: float 20s ease-in-out infinite; /* slower & smooth */
+}
+
+.orb:nth-child(2){
+  width:420px;height:420px;
+  background: radial-gradient(circle at 40% 30%, rgba(124,58,237,.3), transparent 70%);
+  animation-duration:26s; /* slower & smooth */
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
+}
+
+.noise{
+  position:absolute;
+  inset:0;
+  opacity:.08;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+
+.wrap{
+  max-width:1000px;
+  margin:auto;
+  padding:56px 18px 80px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.avatar{
+  width:54px;height:54px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),transparent);
+  display:grid;
+  place-items:center;
+  font-weight:700;
+}
+
+.title h1{
+  margin:0;
+  font-size:28px;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.title p{
+  margin:6px 0 0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.hero{
+  margin-top:22px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--panel),rgba(0,0,0,.45));
+  overflow:hidden;
+}
+
+.heroInner{
+  padding:18px;
+  font-size:15px;
+  color:rgba(242,239,255,.85);
+}
+
+.art{
+  width:100%;
+  height:220px;
+  border-top:1px solid rgba(168,85,247,.2);
+}
+
+.section{
+  margin-top:24px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--panel2),rgba(0,0,0,.45));
+}
+
+.sectionHead{
+  padding:14px 16px;
+  border-bottom:1px solid rgba(168,85,247,.18);
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.sectionBody{
+  padding:18px;
+}
+
+.bio{
+  font-size:14px;
+  line-height:1.6;
+}
+
+.skillGroup h3{
+  font-size:13px;
+  letter-spacing:.14em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.skill{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(168,85,247,.28);
+  background:rgba(0,0,0,.25);
+  font-size:13px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+}
+
+.card{
+  padding:16px;
+  border-radius:16px;
+  border:1px solid rgba(168,85,247,.22);
+  background:rgba(0,0,0,.35);
+  text-decoration:none;
+  color:var(--text);
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent);
+}
+
+.footer{
+  margin-top:40px;
+  text-align:center;
+  font-size:12px;
+  color:rgba(242,239,255,.45);
+}
+</style>
+</head>
+
+<body>
+<div class="bg">
+  <div class="grid"></div>
+  <div class="orbs">
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+  <div class="noise"></div>
+</div>
+
+<main class="wrap">
+<header class="top">
+  <div class="avatar" id="avatar"></div>
+  <div class="title">
+    <h1 id="title"></h1>
+    <p id="subtitle"></p>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="heroInner" id="headline"></div>
+  <svg class="art" viewBox="0 0 1200 220" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="rgba(242,239,255,.25)"/>
+        <stop offset=".5" stop-color="rgba(168,85,247,.95)"/>
+        <stop offset="1" stop-color="rgba(124,58,237,.55)"/>
+      </linearGradient>
+    </defs>
+    <path id="curveA" fill="none" stroke="url(#g)" stroke-width="2"/>
+    <path id="curveB" fill="none" stroke="rgba(168,85,247,.25)" stroke-width="1"/>
+    <path id="curveC" fill="none" stroke="rgba(242,239,255,.18)" stroke-width="1"/>
+  </svg>
+</section>
+
+<section class="section">
+  <div class="sectionHead">About</div>
+  <div class="sectionBody bio" id="bio"></div>
+</section>
+
+<section class="section">
+  <div class="sectionHead">Skills</div>
+  <div class="sectionBody">
+    <div class="skillGroup">
+      <h3>Frontend</h3>
+      <div class="skills" id="frontend"></div>
+    </div>
+    <div class="skillGroup">
+      <h3>Backend / Systems</h3>
+      <div class="skills" id="backend"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sectionHead">Links</div>
+  <div class="sectionBody cards" id="links"></div>
+</section>
+
+<div class="footer" id="footer"></div>
+</main>
+
+<script>
+const config={
+  title:"¿ lucid ?",
+  subtitle:"Software • Security • Cheats",
+  headline:"Signal-driven interfaces, low-level systems, and deterministic design.",
+  bio:"wsp, im lucid. 14 y/o full stack dev 🥶.\n My favorite language is c++. I like music (juice wrld and playboi carti)\n and wrestling.",
+  frontend:["HTML","CSS","JavaScript"],
+  backend:["C++","C#","Python","Windows Batch"],
+  links:[
+    {n:"GitHub",d:"Code and releases",u:"https://github.com/lucid-cpp"},
+    {n:"Discord",d:"Primary contact",u:"https://discord.gg/4sdB3UYcFg"}
+  ],
+  footer:"© 2026 • lucid.cpp",
+  avatarUrl:"https://avatars.githubusercontent.com/u/252649920?v=4"
+};
+
+avatar.innerHTML = `<img src="${config.avatarUrl}" alt="Avatar" style="width:100%;height:100%;border-radius:inherit;">`;
+
+title.textContent=config.title;
+subtitle.textContent=config.subtitle;
+headline.textContent=config.headline;
+bio.textContent=config.bio;
+footer.textContent=config.footer;
+
+config.frontend.forEach(s=>frontend.appendChild(Object.assign(document.createElement("div"),{className:"skill",textContent:s})));
+config.backend.forEach(s=>backend.appendChild(Object.assign(document.createElement("div"),{className:"skill",textContent:s})));
+
+config.links.forEach(l=>{
+  const a=document.createElement("a");
+  a.className="card";
+  a.href=l.u;
+  a.target="_blank";
+  a.innerHTML=`<strong>${l.n}</strong><p>${l.d}</p>`;
+  links.appendChild(a);
+});
+
+const A=curveA,B=curveB,C=curveC;
+
+function path(w,h,amp,a,b,p,y0){
+  let d="";
+  for(let i=0;i<=720;i++){
+    const x=i/720*w;
+    const t=i/720*Math.PI*2;
+    const y=y0+
+      Math.sin(t*a+p)*amp*.6+
+      Math.cos(t*b-p*.7)*amp*.35;
+    d+=(i?"L":"M")+x+" "+y+" ";
+  }
+  return d;
+}
+
+function animate(t){
+  const p=t*.001;
+  A.setAttribute("d",path(1200,220,48,3,2,p,110));
+  B.setAttribute("d",path(1200,220,32,5,3,p+1.4,120));
+  C.setAttribute("d",path(1200,220,22,7,4,p+2.1,100));
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
